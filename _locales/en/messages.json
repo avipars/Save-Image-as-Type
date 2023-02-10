@@ -6,7 +6,7 @@
 		"message": "SaveImageAs"
 	},
 	"extDescription": {
-		"message": "Save image as PNG, JPG or WebP by context menu on image."
+		"message": "Save image as GIF, PNG, JPG or WebP by context menu on image."
 	},
 	"Save_as": {
 		"message": "Save as"

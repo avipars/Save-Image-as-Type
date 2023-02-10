@@ -36,37 +36,39 @@ function download(url, filename, tabId) {
 			// Get the folder's path and store it in lastFolderChoice
 			folder.getDisplayPath(function (path) {
 				lastFolderChoice = path;
-
-				// chrome.downloads.download({
-				// 	url: url,
-				// 	filename: filename,
-				// 	saveAs: true,
-				// 	directory: lastFolderChoice
-				//   }, function() {
-				// 	if (chrome.runtime.lastError) {
-				// 	  alert(chrome.i18n.getMessage("errorOnSaving") + ": \n" + chrome.runtime.lastError.message);
-				// 	} else {
-				// 	  // Update the last folder choice in local storage
-				// 	  localStorage.setItem("lastFolderChoice", lastFolderChoice);
-				// 	}
-				//   });
+				chrome.downloads.download({
+					url: url,
+					filename: filename,
+					saveAs: true,
+					directory: lastFolderChoice
+				}, function () {
+					if (chrome.runtime.lastError) {
+						alert(chrome.i18n.getMessage("errorOnSaving") + ": \n" + chrome.runtime.lastError.message);
+					} else {
+						// Update the last folder choice in local storage
+						localStorage.setItem("lastFolderChoice", lastFolderChoice);
+					}
+				});
 			});
 		});
 	}
+	else {
 
-	chrome.downloads.download({
-		url: url,
-		filename: filename,
-		saveAs: true,
-		directory: lastFolderChoice
-	}, function () {
-		if (chrome.runtime.lastError) {
-			alert(chrome.i18n.getMessage("errorOnSaving") + ": \n" + chrome.runtime.lastError.message);
-		} else {
-			// Update the last folder choice in local storage
-			localStorage.setItem("lastFolderChoice", lastFolderChoice);
-		}
-	});
+
+		chrome.downloads.download({
+			url: url,
+			filename: filename,
+			saveAs: false,
+			directory: lastFolderChoice
+		}, function () {
+			if (chrome.runtime.lastError) {
+				alert(chrome.i18n.getMessage("errorOnSaving") + ": \n" + chrome.runtime.lastError.message);
+			} else {
+				// Update the last folder choice in local storage
+				localStorage.setItem("lastFolderChoice", lastFolderChoice);
+			}
+		});
+	}
 }
 
 
@@ -159,14 +161,14 @@ chrome.contextMenus.create({
 	"type": "separator",
 	"contexts": ["image"]
 });
-chrome.contextMenus.create({
-	"title": chrome.i18n.getMessage("View_in_store") + "...",
-	"type": "normal",
-	"contexts": ["image"],
-	"onclick": function (info, tab) {
-		var url = "https://chrome.google.com/webstore/detail/" + chrome.i18n.getMessage("@@extension_id");
-		window.open(url, '_blank');
-	}
-});
+// chrome.contextMenus.create({
+// 	"title": chrome.i18n.getMessage("View_in_store") + "...",
+// 	"type": "normal",
+// 	"contexts": ["image"],
+// 	"onclick": function (info, tab) {
+// 		var url = "https://chrome.google.com/webstore/detail/" + chrome.i18n.getMessage("@@extension_id");
+// 		window.open(url, '_blank');
+// 	}
+// });
 
 // https://developer.chrome.com/extensions/i18n
