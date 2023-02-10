@@ -27,21 +27,65 @@ function getSuggestedFilename(src, type) {
 var lastFolderChoice = localStorage.getItem("lastFolderChoice");
 
 function download(url, filename, tabId) {
+	if (lastFolderChoice == null) { //no entry 
+		chrome.fileSystem.chooseEntry({ type: 'openDirectory' }, function (folder) {
+			if (!folder) {
+				console.log('No folder selected.');
+				return;
+			}
+			// Get the folder's path and store it in lastFolderChoice
+			folder.getDisplayPath(function (path) {
+				lastFolderChoice = path;
+
+				// chrome.downloads.download({
+				// 	url: url,
+				// 	filename: filename,
+				// 	saveAs: true,
+				// 	directory: lastFolderChoice
+				//   }, function() {
+				// 	if (chrome.runtime.lastError) {
+				// 	  alert(chrome.i18n.getMessage("errorOnSaving") + ": \n" + chrome.runtime.lastError.message);
+				// 	} else {
+				// 	  // Update the last folder choice in local storage
+				// 	  localStorage.setItem("lastFolderChoice", lastFolderChoice);
+				// 	}
+				//   });
+			});
+		});
+	}
+
 	chrome.downloads.download({
-	  url: url,
-	  filename: filename,
-	  saveAs: true,
-	  directory: lastFolderChoice
-	}, function() {
-	  if (chrome.runtime.lastError) {
-		alert(chrome.i18n.getMessage("errorOnSaving") + ": \n" + chrome.runtime.lastError.message);
-	  } else {
-		// Update the last folder choice in local storage
-		localStorage.setItem("lastFolderChoice", lastFolderChoice);
-	  }
+		url: url,
+		filename: filename,
+		saveAs: true,
+		directory: lastFolderChoice
+	}, function () {
+		if (chrome.runtime.lastError) {
+			alert(chrome.i18n.getMessage("errorOnSaving") + ": \n" + chrome.runtime.lastError.message);
+		} else {
+			// Update the last folder choice in local storage
+			localStorage.setItem("lastFolderChoice", lastFolderChoice);
+		}
 	});
-  }
-  
+}
+
+
+
+function download(url, filename, tabId) {
+	chrome.downloads.download(
+		{
+			url: url,
+			filename: filename,
+			saveAs: true
+		},
+		function () {
+			if (chrome.runtime.lastError) {
+				alert(chrome.i18n.getMessage("errorOnSaving") + ': \n' + chrome.runtime.lastError.message);
+			}
+		}
+	);
+}
+
 function saveAsType(img, type, tabId) {
 	if (!canvas) {
 		canvas = document.createElement('canvas');
@@ -81,14 +125,14 @@ function saveAsType(img, type, tabId) {
 // Use the saved last folder choice as the default directory
 function imageLoadCallback(info, type, tabId) {
 	var img = new Image();
-	img.onload = function() {
-	  saveAsType(this, type, tabId);
+	img.onload = function () {
+		saveAsType(this, type, tabId);
 	};
-	img.onerror = function() {
-	  alert(chrome.i18n.getMessage("errorOnLoading") + ": \n" + this.src);
+	img.onerror = function () {
+		alert(chrome.i18n.getMessage("errorOnLoading") + ": \n" + this.src);
 	};
 	img.src = info.srcUrl;
-  }
+}
 
 var canvas;
 
