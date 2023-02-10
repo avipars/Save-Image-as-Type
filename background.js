@@ -53,12 +53,9 @@ function download(url, filename, tabId) {
 		});
 	}
 	else {
-
-
 		chrome.downloads.download({
 			url: url,
 			filename: filename,
-			saveAs: false,
 			directory: lastFolderChoice
 		}, function () {
 			if (chrome.runtime.lastError) {
@@ -118,10 +115,6 @@ function saveAsType(img, type, tabId) {
 		var filename = getSuggestedFilename(img.src, type);
 		download(dataurl, filename, tabId);
 	}
-
-	var dataurl = canvas.toDataURL(mimeType, 0.98);
-	var filename = getSuggestedFilename(img.src, type);
-	download(dataurl, filename, tabId);
 }
 
 // Use the saved last folder choice as the default directory
