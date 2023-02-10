@@ -110,6 +110,7 @@ var canvas;
 		}
 	});
 });
+
 chrome.contextMenus.create({
 	"type": "separator",
 	"contexts": ["image"]

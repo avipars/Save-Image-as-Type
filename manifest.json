@@ -1,7 +1,7 @@
 {
-   "name": "__MSG_extName__",
-   "short_name": "__MSG_extShortName__",
-   "description": "__MSG_extDescription__",
+   "name": "SAVEWEPB",
+   "short_name": "Convertts online webp images to other formats",
+   "description": "SAVEWEBP converts online webp images to formats which are easier for consumption such as PNG and JPG",
    "icons": {
       "128": "icon-128.png",
       "16": "icon-16.png",
@@ -11,7 +11,7 @@
       "scripts": [ "background.js" ]
    },
    "default_locale": "en",
-   "manifest_version": 3,
+   "manifest_version": 2,
    "minimum_chrome_version": "31.0.0.0",
    "permissions": [ "downloads", "contextMenus", "http://*/*", "https://*/*" ],
    "version": "1.1.1"
