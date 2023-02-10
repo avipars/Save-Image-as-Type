@@ -2,7 +2,10 @@
 
 ##为图片添加“另存为PNG/JPG/WebP”右键菜单的Chrome扩展。
 
-Save Image as Type is  an chrome extension which add Save Image as PNG / JPG / WebP option to the context menu of image.
+Save Image as Type is a chrome extension which add Save Image as PNG / JPG / WebP option to the context menu of image.
+
+In this modified fork, we have added the GIF option as well as save prios choice for download folders! 
+To add to chrome, please download the repo as a ZIP, then unzip it (in it's own folder) and then add the extension via "Load Unpacked", selecting the folder as the source!
 
 中文版截图  
 ![Save-Image-as-Type 中文界面截图](https://raw.githubusercontent.com/cuixiping/Save-Image-as-Type/master/screenshot-zh.jpg)
@@ -20,3 +23,5 @@ Screenshot of English version
 
 参考作品2: [Save Image As PNG 1.0.2](https://chrome.google.com/webstore/detail/nkokmeaibnajheohncaamjggkanfbphi)
 (只能保存为PNG，不能保存为JPG和WebP)
+
+
