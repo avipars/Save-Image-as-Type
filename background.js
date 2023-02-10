@@ -46,7 +46,7 @@ function saveAsType(img, type, tabId) {
 	var context = canvas.getContext('2d');
 	var mimeType = 'image/'+(type ==  'jpg' ? 'jpeg' : type);
 	context.drawImage(img, 0, 0);
-	var dataurl =  canvas.toDataURL(mimeType);
+	var dataurl =  canvas.toDataURL(mimeType, 0.98);
 	var filename = getSuggestedFilename(img.src, type);
 	download(dataurl, filename, tabId);
 }
@@ -67,7 +67,7 @@ var canvas;
 //	console.log(info);
 //});
 
-['JPG','PNG','WebP'].forEach(function (type){
+["GIF",'JPG','PNG','WebP'].forEach(function (type){
 	chrome.contextMenus.create({
 		"title" : chrome.i18n.getMessage("Save_as")+' '+type+"...",
 		"type" : "normal",
